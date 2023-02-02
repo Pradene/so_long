@@ -12,6 +12,11 @@
 
 #include "../includes/so_long.h"
 
+void	put(t_game *g, t_img *img, int x, int y)
+{
+	mlx_put_image_to_window(g->id, g->win, img, x, y);
+}
+
 int	render(t_game *g)
 {
 	int		x;
@@ -25,21 +30,16 @@ int	render(t_game *g)
 		x = -1;
 		while (++x * SIZE < g->width)
 		{
-			if (g->map[y][x] == '1')
-				mlx_put_image_to_window(g->id, g->win, g->wall,
-					x * SIZE, y * SIZE);
+			if (g->map[y][x] == 'P')
+				put(g, g->player.img[0], g->player.pos.x, g->player.pos.y);
 			else if (g->map[y][x] == 'C')
-				mlx_put_image_to_window(g->id, g->win, g->item[0],
-					x * SIZE, y * SIZE);
-			else if (g->map[y][x] == 'P')
-				mlx_put_image_to_window(g->id, g->win, g->player.img,
-					g->player.pos.x, g->player.pos.y);
+				put(g, g->item[0], x * SIZE, y * SIZE);
+			else if (g->map[y][x] == '1')
+				put(g, g->wall, x * SIZE, y * SIZE);
 			else if (g->map[y][x] == 'E')
-				mlx_put_image_to_window(g->id, g->win, g->exit,
-					x * SIZE, y * SIZE);
+				put(g, g->exit, x * SIZE, y * SIZE);
 			else
-				mlx_put_image_to_window(g->id, g->win, g->floor,
-					x * SIZE, y * SIZE);
+				put(g, g->floor, x * SIZE, y * SIZE);
 		}
 	}
 	return (0);

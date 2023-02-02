@@ -26,9 +26,9 @@ typedef struct s_pos
 typedef enum e_dir
 {
     NONE,
-    TOP,
-    RIGHT,
     DOWN,
+    RIGHT,
+    TOP,
     LEFT
 }   t_dir;
 
@@ -36,7 +36,7 @@ typedef struct s_player
 {
     t_pos   pos;
     t_pos   prev_pos;
-    t_img   *img;
+    t_img   *img[16];
     t_dir   dir;
     t_dir   next_dir;
 }   t_player;
@@ -89,6 +89,7 @@ void    init_player(t_game *game);
 void	change_pos(t_game *game, t_player *pl);
 
 // RENDER
+void	put(t_game *g, t_img *img, int x, int y);
 int     render(t_game *game);
 int     update(t_game *game);
 

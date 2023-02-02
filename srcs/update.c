@@ -32,10 +32,20 @@ static void	update_items(t_game *g)
 
 static void	update_player(t_game *g)
 {
+	static int	frame = 0;
 	t_player	*pl;
 
 	pl = &g->player;
+	frame =(frame + 1) % 16;
 	change_pos(g, &g->player);
+	mlx_put_image_to_window(g->id, g->win, g->floor,
+		pl->prev_pos.x, pl->prev_pos.y);
+	if (!pl->dir)
+		mlx_put_image_to_window(g->id, g->win, pl->img[0],
+		pl->pos.x, pl->pos.y);
+	else
+		mlx_put_image_to_window(g->id, g->win, pl->img[frame / 4 + (pl->dir - 1) * 4],
+		pl->pos.x, pl->pos.y);
 	pl->prev_pos.x = pl->pos.x;
 	pl->prev_pos.y = pl->pos.y;
 }
