@@ -73,6 +73,8 @@ int		check_lines(char **map);
 int		check_path(char **map, int x, int y);
 int		check_pos(char **map);
 int		check_walls(char **map);
+int     check_item(char **map);
+int     check_char(char **map);
 int		check(char **map);
 
 // INIT
