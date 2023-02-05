@@ -27,7 +27,6 @@ static void	move(t_game *g, int x, int y)
 {
 	int		posx;
 	int		posy;
-	char	*s;
 
 	posx = g->player.pos.x / SIZE;
 	posy = g->player.pos.y / SIZE;

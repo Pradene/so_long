@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprites.c                                          :+:      :+:    :+:   */
+/*   sprites_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpradene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 18:17:17 by lpradene          #+#    #+#             */
-/*   Updated: 2023/02/01 18:17:48 by lpradene         ###   ########.fr       */
+/*   Created: 2023/02/05 01:49:58 by lpradene          #+#    #+#             */
+/*   Updated: 2023/02/05 01:50:00 by lpradene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	init_sprite(t_game *getgid, t_img **img, char *path)
 			&size, &size);
 }
 
-void	init_sprites_item(t_game *g)
+static void	init_sprites_item(t_game *g)
 {
 	init_sprite(g, &g->item[0], "assets/item/item0.xpm");
 	if (!g->item[0])
@@ -49,7 +49,7 @@ void	init_sprites_item(t_game *g)
 		quit(g);
 }
 
-void	init_sprites_pl(t_game *g)
+static void	init_sprites_pl1(t_game *g)
 {
 	init_sprite(g, &g->player.img[0], "assets/player/player_d0.xpm");
 	if (!g->player.img[0])
@@ -75,6 +75,10 @@ void	init_sprites_pl(t_game *g)
 	init_sprite(g, &g->player.img[7], "assets/player/player_r3.xpm");
 	if (!g->player.img[7])
 		quit(g);
+}
+
+static void	init_sprites_pl2(t_game *g)
+{
 	init_sprite(g, &g->player.img[8], "assets/player/player_u0.xpm");
 	if (!g->player.img[8])
 		quit(g);
@@ -103,6 +107,9 @@ void	init_sprites_pl(t_game *g)
 
 void	init_sprites(t_game *g)
 {
+	init_sprites_pl1(g);
+	init_sprites_pl2(g);
+	init_sprites_item(g);
 	init_sprite(g, &g->floor, "assets/floor.xpm");
 	if (!g->floor)
 		quit(g);
@@ -112,64 +119,4 @@ void	init_sprites(t_game *g)
 	init_sprite(g, &g->exit, "assets/exit.xpm");
 	if (!g->exit)
 		quit(g);
-	init_sprites_pl(g);
-	init_sprites_item(g);
-}
-
-void	destroy_sprites(t_game *g)
-{
-	if (g->wall != NULL)
-		mlx_destroy_image(g->id, g->wall);
-	if (g->floor != NULL)
-		mlx_destroy_image(g->id, g->floor);
-	if (g->exit != NULL)
-		mlx_destroy_image(g->id, g->exit);
-	if (g->item[0] != NULL)
-		mlx_destroy_image(g->id, g->item[0]);
-	if (g->item[1] != NULL)
-		mlx_destroy_image(g->id, g->item[1]);
-	if (g->item[2] != NULL)
-		mlx_destroy_image(g->id, g->item[2]);
-	if (g->item[3] != NULL)
-		mlx_destroy_image(g->id, g->item[3]);
-	if (g->item[4] != NULL)
-		mlx_destroy_image(g->id, g->item[4]);
-	if (g->item[5] != NULL)
-		mlx_destroy_image(g->id, g->item[5]);
-	if (g->item[6] != NULL)
-		mlx_destroy_image(g->id, g->item[6]);
-	if (g->item[7] != NULL)
-		mlx_destroy_image(g->id, g->item[7]);
-	if (g->player.img[0] != NULL)
-		mlx_destroy_image(g->id, g->player.img[0]);
-	if (g->player.img[1] != NULL)
-		mlx_destroy_image(g->id, g->player.img[1]);
-	if (g->player.img[2] != NULL)
-		mlx_destroy_image(g->id, g->player.img[2]);
-	if (g->player.img[3] != NULL)
-		mlx_destroy_image(g->id, g->player.img[3]);
-	if (g->player.img[4] != NULL)
-		mlx_destroy_image(g->id, g->player.img[4]);
-	if (g->player.img[5] != NULL)
-		mlx_destroy_image(g->id, g->player.img[5]);
-	if (g->player.img[6] != NULL)
-		mlx_destroy_image(g->id, g->player.img[6]);
-	if (g->player.img[7] != NULL)
-		mlx_destroy_image(g->id, g->player.img[7]);
-	if (g->player.img[8] != NULL)
-		mlx_destroy_image(g->id, g->player.img[8]);
-	if (g->player.img[9] != NULL)
-		mlx_destroy_image(g->id, g->player.img[9]);
-	if (g->player.img[10] != NULL)
-		mlx_destroy_image(g->id, g->player.img[10]);
-	if (g->player.img[11] != NULL)
-		mlx_destroy_image(g->id, g->player.img[11]);
-	if (g->player.img[12] != NULL)
-		mlx_destroy_image(g->id, g->player.img[12]);
-	if (g->player.img[13] != NULL)
-		mlx_destroy_image(g->id, g->player.img[13]);
-	if (g->player.img[14] != NULL)
-		mlx_destroy_image(g->id, g->player.img[14]);
-	if (g->player.img[15] != NULL)
-		mlx_destroy_image(g->id, g->player.img[15]);
 }

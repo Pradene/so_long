@@ -31,7 +31,8 @@ FILES	= gnl/get_next_line.c \
 		move.c \
 		player.c \
 		render.c \
-		sprites.c \
+		sprites_init.c \
+		sprites_destroy.c \
 		update.c \
 
 SRCS = ${addprefix srcs/, ${FILES}}
@@ -49,10 +50,10 @@ OBJS_B = $(BONUS:.c=.o)
 %.o: %.c
 	$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -c $< -o $@
 
-srcs: $(OBJS_S)
+$(NAME): $(OBJS_S)
 	$(CC) $(OBJS_S) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME) 
 
-all: srcs
+all: $(NAME)
 
 bo: $(OBJS_B)
 	$(CC) $(OBJS_B) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME) 
