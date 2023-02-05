@@ -5,25 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpradene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 00:08:19 by lpradene          #+#    #+#             */
-/*   Updated: 2023/02/05 00:08:20 by lpradene         ###   ########.fr       */
+/*   Created: 2023/02/05 00:32:26 by lpradene          #+#    #+#             */
+/*   Updated: 2023/02/05 00:33:05 by lpradene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int check_item(char **map)
+int	check_item(char **map)
 {
-    int y;
-    int x;
+	int	y;
+	int	x;
 
-    y = -1;
-    while (map[++y])
-    {
-        x = -1;
-        while (map[y][++x])
-        {
-            if (map[y][x] == 'C')
-                return (1);
-        }
-    }
-    return (0);
+	y = -1;
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+		{
+			if (map[y][x] == 'C')
+				return (1);
+		}
+	}
+	return (0);
 }
