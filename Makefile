@@ -48,17 +48,17 @@ OBJS_S = $(SRCS:.c=.o)
 OBJS_B = $(BONUS:.c=.o)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -c $< -o $@
-
-$(NAME): $(OBJS_S)
-	$(CC) $(OBJS_S) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME) 
+	$(CC) $(CFLAGS) -Imlx -O3 -c $< -o $@
 
 all: $(NAME)
 
-bo: $(OBJS_B)
-	$(CC) $(OBJS_B) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME) 
+$(NAME): $(OBJS_S)
+	$(CC) $(OBJS_S) -Lmlx -lmlx -Imlx -lXext -lX11 -lm -lz -o $(NAME)
 
 bonus: bo
+
+bo: $(OBJS_B)
+	$(CC) $(OBJS_B) -Lmlx -lmlx -Imlx -lXext -lX11 -lm -lz -o $(NAME) 
 
 clean:
 	rm -f $(OBJS_S) $(OBJS_B)

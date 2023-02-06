@@ -29,17 +29,17 @@ int	endian1;
 int	endian2;
 int	endian3;
 int	endian4;
-char	*game1;
-char	*game2;
-char	*game3;
-char	*game4;
+char	*data1;
+char	*data2;
+char	*data3;
+char	*data4;
 int	xpm1_x;
 int	xpm1_y;
 
 int	local_endian;
 
 int	color_map_1(void *win,int w,int h);
-int	color_map_2(unsigned char *game,int bpp,int sl,int w,int h,int endian, int type);
+int	color_map_2(unsigned char *data,int bpp,int sl,int w,int h,int endian, int type);
 
 int	expose_win1(void *p)
 {
@@ -133,12 +133,12 @@ int	main()
       printf(" !! KO !!\n");
       exit(1);
     }
-  game1 = mlx_get_game_addr(im1,&bpp1,&sl1,&endian1);
+  data1 = mlx_get_data_addr(im1,&bpp1,&sl1,&endian1);
   printf("OK (bpp1: %d, sizeline1: %d endian: %d type: %d)\n",bpp1,sl1,endian1,
 	 ((t_img *)im1)->type);
 
   printf(" => Fill Image1 ...");
-  color_map_2(game1,bpp1,sl1,IM1_SX,IM1_SY,endian1, 1);
+  color_map_2(data1,bpp1,sl1,IM1_SX,IM1_SY,endian1, 1);
   printf("OK (pixmap : %d)\n",(int)((t_img *)im1)->pix);
 
   printf(" => Put Image1 ...");
@@ -157,12 +157,12 @@ int	main()
       printf(" !! KO !!\n");
       exit(1);
     }
-  game3 = mlx_get_game_addr(im3,&bpp3,&sl3,&endian3);
+  data3 = mlx_get_data_addr(im3,&bpp3,&sl3,&endian3);
   printf("OK (bpp3 %d, sizeline3 %d endian3 %d type %d)\n",bpp3,sl3,endian3,
 	 ((t_img *)im3)->type);
 
   printf(" => Fill Image3 ...");
-  color_map_2(game3,bpp3,sl3,IM3_SX,IM3_SY,endian3, 1);
+  color_map_2(data3,bpp3,sl3,IM3_SX,IM3_SY,endian3, 1);
   printf("OK (pixmap : %d)\n",(int)((t_img *)im3)->pix);
 
   printf(" => Put Image3 ...");
@@ -182,7 +182,7 @@ int	main()
       printf(" !! KO !!\n");
       exit(1);
     }
-  game2 = mlx_get_game_addr(im2,&bpp2,&sl2,&endian2);
+  data2 = mlx_get_data_addr(im2,&bpp2,&sl2,&endian2);
   printf("OK (xpm %dx%d)(img bpp2: %d, sizeline2: %d endian: %d type: %d)\n",
 	 xpm1_x,xpm1_y,bpp2,sl2,endian2,((t_img *)im2)->type);
   sleep(2);
@@ -200,8 +200,8 @@ int	main()
       printf(" !! KO !!\n");
       exit(1);
     }
-  game4 = mlx_get_game_addr(im4,&bpp4,&sl4,&endian4);
-  color_map_2(game4,bpp4,sl4,IM3_SX,IM3_SY,endian4, 2);
+  data4 = mlx_get_data_addr(im4,&bpp4,&sl4,&endian4);
+  color_map_2(data4,bpp4,sl4,IM3_SX,IM3_SY,endian4, 2);
 
   printf(" 3rd window, Installing hooks ...");
   win3 = mlx_new_window(mlx,WIN1_SX,WIN1_SY,"Title3");
@@ -240,7 +240,7 @@ int	color_map_1(void *win,int w,int h)
 }
 
 
-int	color_map_2(unsigned char *game,int bpp,int sl,int w,int h,int endian, int type)
+int	color_map_2(unsigned char *data,int bpp,int sl,int w,int h,int endian, int type)
 {
   int	x;
   int	y;
@@ -255,7 +255,7 @@ int	color_map_2(unsigned char *game,int bpp,int sl,int w,int h,int endian, int t
   y = h;
   while (y--)
     {
-      ptr = game+y*sl;
+      ptr = data+y*sl;
       x = w;
       while (x--)
         {

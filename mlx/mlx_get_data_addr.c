@@ -1,5 +1,5 @@
 /*
-** mlx_get_game_addr.c for MiniLibX in raytraceur
+** mlx_get_data_addr.c for MiniLibX in raytraceur
 ** 
 ** Made by Charlie Root
 ** Login   <ol@epitech.net>
@@ -19,5 +19,5 @@ char	*mlx_get_data_addr(t_img *img,int *bits_per_pixel,
   *bits_per_pixel = img->bpp;
   *size_line = img->size_line;
   *endian = img->image->byte_order;
-  return (img->game);
+  return (img->data);
 }

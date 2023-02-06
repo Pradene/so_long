@@ -41,7 +41,7 @@ void		*mlx_int_xpm_f_image(t_xvar *xvar,int *width,int *height,
   *height = img1->height;
   if (mlx_int_egal_img(im2->image,img1))
     {
-      bcopy(img1->game,im2->game,img1->height*img1->bytes_per_line);
+      bcopy(img1->data,im2->data,img1->height*img1->bytes_per_line);
       XDestroyImage(img1);
       return (im2);
     }
@@ -54,11 +54,11 @@ void		*mlx_int_xpm_f_image(t_xvar *xvar,int *width,int *height,
   if (im2->type>MLX_TYPE_XIMAGE)
     {
       XShmDetach(xvar->display,&(im2->shm));
-      shmdt(im2->game);
+      shmdt(im2->data);
     }
   XDestroyImage(im2->image);
   im2->image = img1;
-  im2->game = img1->game;
+  im2->data = img1->data;
   im2->type = MLX_TYPE_XIMAGE;
   im2->size_line = img1->bytes_per_line;
   im2->bpp = img1->bits_per_pixel;
@@ -90,7 +90,7 @@ void	*mlx_xpm_file_to_image(t_xvar *xvar,char *filename,
 }
 
 
-void	*mlx_xpm_to_image(t_xvar *xvar,char **game,int *width,int *height)
+void	*mlx_xpm_to_image(t_xvar *xvar,char **data,int *width,int *height)
 {
-  return (mlx_int_xpm_f_image(xvar,width,height,XpmCreateImageFromgame,(void *)game));
+  return (mlx_int_xpm_f_image(xvar,width,height,XpmCreateImageFromdata,(void *)data));
 }
