@@ -33,11 +33,9 @@ FILES	= gnl/get_next_line.c \
 		render.c \
 		sprites_init.c \
 		sprites_destroy.c \
-		update.c \
+		update.c
 
 SRCS = ${addprefix srcs/, ${FILES}}
-BONUS = ${addprefix bonus/, ${FILES}}
-
 CC		= cc
 
 CFLAGS	= -Wall -Wextra -Werror
